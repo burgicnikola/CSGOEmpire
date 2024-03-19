@@ -1,3 +1,11 @@
+Question: 
+
+This is our main product and the landing page https://csgoempire.com/roulette
+How would you approach the testing of roulette? Describe the tests that you would do and the things you'd pay attention to.
+
+
+Answer:
+
 UI tests:
 1. I'd make sure that everything is pixel-perfect, with no alignment issues, and that there are no design errors or broken images. Also there must be no inconsistencies in font style/ color.
 2. Cross-browser testing - I'd check everything from the step 1, just in different browsers, to make sure there aro no browser-specific issues.
