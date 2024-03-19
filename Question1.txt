@@ -9,20 +9,25 @@ I'll talk about the tests as if I am already logged in to my account.
 
 I'll start from the top of the page to the bottom.
 ---Info banner---
-1. In the section with text "For the month of March, we’re hosting a 500,000 coin monthly roulette race. Scroll down to see more." I'd check whether the 'Got it' button works as expected (scrolls the page down to the race board). After clicking the button, the info banner should disappear.
+1. In the section with text "For the month of March, we’re hosting a 500,000 coin monthly roulette race. Scroll down to see more." I'd check whether the 'Got it' button works as expected (scrolls 
+  the page down to the race board). After clicking the button, the info banner should disappear.
 
 ---Sound button---
 2. Check the "Sound on/ off" button. On - you can hear the beep when the roll is done, Off - no beep at all. Also, the icon changes.
 
 ---Wheel and bet amounts---
-3. Check that the rolling timer lasts exactly as per design (15sec as I can tell), and that the rolling starts immediatelly after the time has passed. Every roll starts from the 0 posiotion - the dice. Terrorist icon is on the left, and CT is on the right. There are 7 Terrorist and CT icons, and one Dice icon that comes once in every 15 times.
-4. Check that the logos (terrorist, CT, dice) are grayed out while the timer is on, and that they lose the gray-out when they start rolling. The timer is visible only during the counting, and disappears when the roll starts.
+3. Check that the rolling timer lasts exactly as per design (15sec as I can tell), and that the rolling starts immediatelly after the time has passed. Every roll starts from the 0 posiotion - the dice. 
+  Terrorist icon is on the left, and CT is on the right. There are 7 Terrorist and CT icons, and one Dice icon that comes once in every 15 times.
+4. Check that the logos (terrorist, CT, dice) are grayed out while the timer is on, and that they lose the gray-out when they start rolling. The timer is visible only during the counting, and disappears 
+  when the roll starts.
 5*. I would reduce the speed of the rolling of logos to make sure the order of the logos during the roll is correct/ as per the design of the game.
 6. Make sure that whatever is rolled is written correctly into the DB and that the proper bettors are rewarded accordingly (2x for terrorist and CT, 14x for dice).
 7. Check that the 'previous rolls' shown under the rolling wheel are correct - make sure that everything is retreived from the DB(or cache) and displayed correctly in the 'previous rolls' section.
 8. 'Previous rolls' button - make sure I'm taken to the correct page and test it in the similar fashion as in the previos step.
-9*. 'Last 100' - check in the DB, and roll history page that the numbers match with the numbers shown on the roulette page. Since the roulette might spin too fast for me to finish counting, I believe that stopping or prolongating the spinning is possible in QA environment. With no new entries I would be able to count and compare.
-10. Entering the bet amount - As the minimum bet is 0.01, and the default maximum bet amount is 100,000 coins, I'd use the boundary values to test this functionality. I'd make sure that the bet of 0 coins is not accepted, and that the bet of 0.01 is accepted. Also, I'd check that 100,000 is accepted, and that 100,000.01 is not accepted. 
+9*. 'Last 100' - check in the DB, and roll history page that the numbers match with the numbers shown on the roulette page. Since the roulette might spin too fast for me to finish counting, I believe that 
+  stopping or prolongating the spinning is possible in QA environment. With no new entries I would be able to count and compare.
+10. Entering the bet amount - As the minimum bet is 0.01, and the default maximum bet amount is 100,000 coins, I'd use the boundary values to test this functionality. I'd make sure that the bet of 0 coins 
+  is not accepted, and that the bet of 0.01 is accepted. Also, I'd check that 100,000 is accepted, and that 100,000.01 is not accepted. 
 11. Besides that I'd make sure that no other characters but numbers and a dot for decimals (.) are accepted into the input field (I have noticed that + and - are also accepted, not sure if it's by design). 
 12. Also check whether the input of e.g. ".2" will be accepted as "0.2". 
 13. Check that no more than 2 decimal points can be written into the field ("5.12" is accepted; "5.123" - the 3 will not be written into the field, it will remain as "5.12").
@@ -32,13 +37,15 @@ I'll start from the top of the page to the bottom.
 
 ---Placing bets---
 Given I have coins in my Account Balance:
-17. Enter a proper bet amount and try betting on only one option - check all 3 options one by one. Make sure I get/ lose the apropriate amount of coins based on the bet amount and the roll result (win/lose). Number of coins in the upper right corner is updated.
+17. Enter a proper bet amount and try betting on only one option - check all 3 options one by one. Make sure I get/ lose the apropriate amount of coins based on the bet amount and the roll result (win/lose). 
+  Number of coins in the upper right corner is updated.
 18. Enter a proper amount and try betting on 2 options at the same time. Make sure my Account Balance is updated accordingly after the roll.
 19. (I am not sure that this is possible) Enter a proper amount and bet on all 3 options. Either make sure it is not allowed or make sure my Account Balance is updated accordingly after the roll.
 20. Try betting with no amount entered into the field - confirm an error pops up informing me that The minimum bet amount is 0.01
 21. When placing a bet, check that my profile picture, level, username and betting amount is properly displayed in the betting pool I'm betting in.
 22. Total bets and total coins per betting pool must be correctly calculated and displayed.
-23. When the roll is done, make sure that the total coins and coins per bettor are updated accordingly (red with prepended minus in case of losers, green with prepended plus and accordingly updated coins amount, either x2 or x14, for winners).
+23. When the roll is done, make sure that the total coins and coins per bettor are updated accordingly (red with prepended minus in case of losers, green with prepended plus and accordingly updated coins amount, 
+  either x2 or x14, for winners).
 24*. Using multiple accounts in QA environment, check that while placing bets at approximately the same time, the tables and betting information previously mentioned are updated accordingly with no lags or delays.
 25. Make sure that it is possible to place bets only while the timer is active. During the roll, the 'Place bet' buttons are grayed out and unclickable.
 26.*Possible security test*: Make sure that it is not possible to place a bet during the roll by sending a bet request using some of the API tools (e.g. Postman).
@@ -48,25 +55,30 @@ Given I have no coins in my Account Balance:
 
 ---Monthly Roulette Race---
 29. Confirm that the table is properly formated.
-30.* In QA environment, set the Montly race to be finished in e.g. 2 minutes from the present moment and confirm the rewards have been distributed and that the race data has been reset for the following month - everybody starts from 0(in case there is a race next month).
+30.* In QA environment, set the Montly race to be finished in e.g. 2 minutes from the present moment and confirm the rewards have been distributed and that the race data has been reset for the following month - everybody 
+  starts from 0(in case there is a race next month).
 31. The first three contestants should have their places bolded (1st, 2nd, 3rd), and a gold/silver/bronze medal to the left of their place
 32. Confirm that the table is updated correctly in set intervals. Check the usernames and total wagered sum in the DB. 
 33. Correct prize coin amount should be written for each place and the font of the first three prizes should be whiter than for the rest of the prizes
 34. Wagered amount written with 2 decimal points
 35. My username is always present in the table with correct data
 36. Clicking on "Race rules" opens a pop up with information about the race
-37. Check the pagination of the table (First, 1, 2, 3, ..., Last) and confirm the correct data is dispalyed on the page. In case I am on page 2, pages 1, 2, 3, 4 should be displayed as options. For pages 3 and above the formula is 'page-2, page-1, page, page+1, page+2'. In case I'm on the last page, the formula for the shown page numbers is 'last-2, last-1, last'. In case of the second last page, 4 last pages will be shown as selectable options. Confirm that the last page is page 100.
+37. Check the pagination of the table (First, 1, 2, 3, ..., Last) and confirm the correct data is dispalyed on the page. In case I am on page 2, pages 1, 2, 3, 4 should be displayed as options. For pages 3 and above 
+  the formula is 'page-2, page-1, page, page+1, page+2'. In case I'm on the last page, the formula for the shown page numbers is 'last-2, last-1, last'. In case of the second last page, 4 last pages will be shown as 
+  selectable options. Confirm that the last page is page 100.
 
 ---Chat---
 38. Test switching to different chat rooms
 39. Confirm that user's profile picture, level, and username are displayed when they send a message
 40. Confirm that clicking on a user in the chat opens a submenu bellow the message with options 'mention' and 'mute'. Confirm those options work as intended
 41. Try sending an empty message - confirm nothing happens.
-42. In case I have no more coins and I try sending a message, confirm that a notification shows in the chat, above the input field, and that it says' You must bet at least 250.00 or deposit at least 1.00 coins total in order to chat. You need to bet 249.99 or deposit 1.00 more coins to chat.' Confirm that it is written in red.
+42. In case I have no more coins and I try sending a message, confirm that a notification shows in the chat, above the input field, and that it says' You must bet at least 250.00 or deposit at least 1.00 coins total 
+  in order to chat. You need to bet 249.99 or deposit 1.00 more coins to chat.' Confirm that it is written in red.
 43. If there are min and max values for the number of characters per message, test them using boundry value analysis.
 44. Check whether all the characters are allowed, including different encodings (e.g. unicode, Latin-1, etc.)
 45. Confirm Chat Menu is opened by clicking on the 3 hoorizontal dots in the right end of the chat text input field.
 46. Test all the chat menu options: Send a tip, Chat rules, Manage muted users, Close Chat.
 47. When the chat is closed, confirm the chat 'bubble' appears in the bottom left of the page and that clicking it openes the chat.
 
-Other than testing these functionalities directly related to the roulette game, I would also test whether all the other links/ buttons on the page work - those in header and footer(e.g. Fairness, Games, Log out, Withdraw, Deposit, About, Careers, etc.). There is also a 'Chat with support' option in the bottom right of the page that would have to be separately tested.
+Other than testing these functionalities directly related to the roulette game, I would also test whether all the other links/ buttons on the page work - those in header and footer(e.g. Fairness, Games, Log out, Withdraw, 
+  Deposit, About, Careers, etc.). There is also a 'Chat with support' option in the bottom right of the page that would have to be separately tested.
